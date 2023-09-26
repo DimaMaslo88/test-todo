@@ -5,7 +5,7 @@ import {EditableSpan} from "ui/components/universal/EditableSpan";
 import {useDispatch, useSelector} from "react-redux";
 import {changeTaskStatus, changeTaskTitle, filterCheckedItems, setCheckedItems} from "bll/actions/tasksActions";
 import {selectCheckedItems} from "bll/selectors";
-import style from 'styles/Tasks.module.css'
+import style from 'styles/Tasks.module.scss'
 import {ToolTip} from "ui/components/tooltip/ToolTip";
 
 type TaskComponentType = {

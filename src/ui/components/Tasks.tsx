@@ -10,8 +10,8 @@ import {
     filterTasksByStatus,
     removeTasksStatus, setCheckedItems
 } from "bll/actions/tasksActions";
-import style from 'styles/Tasks.module.css'
-import s from 'styles/input.module.css'
+import style from 'styles/Tasks.module.scss'
+import s from 'styles/input.module.scss'
 
 export const Tasks = () => {
     const dispatch = useDispatch()

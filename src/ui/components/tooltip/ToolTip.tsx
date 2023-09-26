@@ -1,5 +1,5 @@
 import React, {ReactElement, useState,useRef} from 'react';
-import style from 'styles/ToolTip.module.css'
+import style from 'styles/ToolTip.module.scss'
 
 type PropsType = {
     children: ReactElement;
