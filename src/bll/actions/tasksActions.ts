@@ -1,10 +1,12 @@
 import {FilterTaskType} from "bll/reducers/tasksReducer";
 
 export type AddTaskType = ReturnType<typeof addTask>
-export const addTask = (title: string) => {
+export const addTask = (title: string,description:string,date:string) => {
     return {
         type: 'ADD-TASK',
-        title
+        title,
+        description,
+        date
     } as const
 }
 export type ChangeTaskType = ReturnType<typeof changeTaskTitle>
@@ -14,6 +16,14 @@ export const changeTaskTitle = (id: string, value: string) => {
         id,
         value
     } as const
+}
+export type ChangeTaskTextType = ReturnType<typeof changeTaskText>
+export const changeTaskText  = (id:string,textValue:string)=>{
+    return {
+        type:'CHANGE-TASK-TEXT',
+        id,
+        textValue
+    }as const
 }
 export type ChangeTaskStatusType = ReturnType<typeof changeTaskStatus>
 export const changeTaskStatus = (id: string, status: boolean) => {

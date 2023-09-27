@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCheckedItems, selectFilter, selectModal, selectTasks } from 'bll/selectors';
+import { selectCheckedItems, selectFilter, selectMicroTaskModal, selectModal, selectTasks } from 'bll/selectors';
 import { TaskType } from 'bll/reducers/tasksReducer';
 import { Task } from 'ui/components/Task';
 import {
@@ -14,11 +14,12 @@ import style from 'styles/Tasks.module.scss';
 import s from 'styles/input.module.scss';
 import Draggable from 'react-draggable';
 
-import { setModalWindow } from 'bll/actions/modalAction';
+import { setMicroTaskModalWindow, setModalWindow } from 'bll/actions/modalAction';
 import { AddIcon } from 'icons/addIcon';
 import { ToolTip } from 'ui/components/tooltip/ToolTip';
 import { ModalHelper } from 'ui/helpers/modalHelper';
 import { Modal } from 'ui/components/modals/addModalWindow/Modal';
+import { MicroTaskModal } from 'ui/components/modals/addModalWindow/MicroTaskModal';
 
 export const Tasks2 = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export const Tasks2 = () => {
   const filters = useSelector(selectFilter);
   const checkedItems = useSelector(selectCheckedItems);
   const modal = useSelector(selectModal);
-
+const microTaskModal = useSelector(selectMicroTaskModal)
   // const [value, setValue] = useState<string>('');
   useEffect(() => {
     const a = localStorage.getItem('tasks');
@@ -51,10 +52,10 @@ export const Tasks2 = () => {
 
   let filterTasks = tasks;
   if (filters === 'active') {
-    filterTasks = tasks.filter(f => !f.isDone);
+    filterTasks = tasks.filter(f => !f.status);
   }
   if (filters === 'completed') {
-    filterTasks = tasks.filter(f => f.isDone);
+    filterTasks = tasks.filter(f => f.status);
   }
   // const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
   //   setValue(e.currentTarget.value);
@@ -95,12 +96,16 @@ export const Tasks2 = () => {
   return (
 
     <div className={style.tasksContainer}>
+
       {modal &&
       <div className={style.modalContainer}>
-        <Modal  title = 'Добавить Задачу'/>
+        <Modal title='Добавить Задачу' />
       </div>
-
       }
+      {microTaskModal &&
+      <MicroTaskModal  title = 'Добавить подзадачу'/>
+      }
+
       <div>
         <ToolTip text='Добавить Задание'>
           < AddIcon
@@ -113,11 +118,22 @@ export const Tasks2 = () => {
       </div>
       <div className={style.taskBlock}>
         {tasks.map(
-          ({ id, title, isDone }: TaskType) => (
+          ({ id, title, status, description, date, timeAtWork, finishDate, priority, microTasks }: TaskType) => (
             <Draggable>
               <ul key={id}>
                 <li className={style.li}>
-                  <Task key={id} taskId={id} title={title} isDone={isDone} />
+                  <Task
+                    key={id}
+                    taskId={id}
+                    title={title}
+                    status={status}
+                    description={description}
+                    date={date}
+                    timeAtWork={timeAtWork}
+                    finishDate={finishDate}
+                    priority={priority}
+                    microTasks={microTasks}
+                  />
                 </li>
 
               </ul>

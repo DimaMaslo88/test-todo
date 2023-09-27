@@ -44,12 +44,14 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+
 
 
   .searchContainer {
     margin-top: 20px;
     width: 35%;
-    height: 35%;
+    height: 45%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -57,7 +59,7 @@
     background-color: rgb(200, 239, 230);
     border-radius: 6px;
     //box-shadow: 4px 3px 4px 0 lightgrey
-    .addTaskBlock{
+    .addTaskBlock {
       display: flex;
 
     }
@@ -75,27 +77,59 @@
   margin-bottom: 10px;
 
 }
-
+.inputBlock{
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: space-around;
+}
 .li {
-  height: 45px;
+  height: 100%;
+  width: 100%;
   list-style-type: none;
   line-height: 1.8;
   border: 1px solid lightgrey;
   box-shadow: 5px 5px 5px lightslategray;
+  cursor: grabbing;
+  .task {
+    display: flex;
+    flex-direction:column;
+    .titleTaskBlock{
+      display: flex;
+      align-items: center;
+      .checkbox {
+        margin-left: 20px;
+      }
+      .editableSpan {
+        margin-left: 20px;
+      }
+    }
+  }
+
 }
 
-.task {
+
+.description{
   display: flex;
-  flex-direction: row;
-
 }
-
-.checkbox {
-  margin-left: 20px;
+// стили для подзадач и модалки
+.microTaskLi {
+  height: 100%;
+  width: 100%;
+  list-style-type: none;
+  line-height: 1.8;
 }
-
-.editableSpan {
-  margin-left: 20px;
+.microTaskModal{
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  background-color: rgb(200, 239, 230);
+  display: flex;
+  z-index: 100;
+  .microTaskBlock{
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .buttonContainer {

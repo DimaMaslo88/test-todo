@@ -1,22 +1,28 @@
-import { SetModalWindowType } from 'bll/actions/modalAction';
+import { SetMicroTaskModalWindowType, SetModalWindowType } from 'bll/actions/modalAction';
 
 export const ModalState = {
-  isOpen:false
+  isOpen: false,
+  microTaskModalIsOpen: false,
+};
 
-}
-
-export type ModalReducerType={
-  isOpen:boolean
+export type ModalReducerType = {
+  isOpen: boolean
+  microTaskModalIsOpen:boolean
 }
 
 export type ModalReducerActionType = SetModalWindowType
+|SetMicroTaskModalWindowType
 
-export const ModalReducer = (state:ModalReducerType = ModalState,action:ModalReducerActionType):ModalReducerType=>{
+export const ModalReducer = (state: ModalReducerType = ModalState, action: ModalReducerActionType): ModalReducerType => {
   switch (action.type) {
-    case 'SET-MODAL-WINDOW':{
-      return {...state,isOpen:action.isOpen}
+    case 'SET-MODAL-WINDOW': {
+      return { ...state, isOpen: action.isOpen };
     }
-    default :  return state
+    case 'SET-MICRO-TASK-MODAL-WINDOW':{
+      return {...state,microTaskModalIsOpen:action.microTaskModalIsOpen}
+    }
+    default :
+      return state;
 
   }
-}
+};

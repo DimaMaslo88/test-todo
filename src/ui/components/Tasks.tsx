@@ -23,20 +23,17 @@ export const Tasks = () => {
     const rightValue = value.trim()
     let filterTasks = tasks
     if (filters === 'active') {
-        filterTasks = tasks.filter(f => !f.isDone)
+        filterTasks = tasks.filter(f => !f.status)
     }
     if (filters === 'completed') {
-        filterTasks = tasks.filter(f => f.isDone)
+        filterTasks = tasks.filter(f => f.status)
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value)
 
     }
     const addTaskHandler = () => {
-        if (value.trim() !== '') {
-            dispatch(addTask(value))
-            setValue("")
-        }
+
     }
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -80,10 +77,10 @@ export const Tasks = () => {
             </div>
             <div className={style.taskBlock}>
                 {filterTasks.map(
-                    ({id, title, isDone}: TaskType) => (
+                    ({id, title, status}: TaskType) => (
                         <ul key={id} >
                             <li className={  style.li}>
-                                <Task key={id} taskId={id} title={title} isDone={isDone}/>
+                               hello
                             </li>
 
                         </ul>

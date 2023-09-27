@@ -4,24 +4,33 @@ import { addTask } from 'bll/actions/tasksActions';
 import { useDispatch, useSelector } from 'react-redux';
 import style from 'styles/Tasks.module.scss';
 import { setModalWindow } from 'bll/actions/modalAction';
-import { selectModal } from 'bll/selectors';
 import { ModalHelper } from 'ui/helpers/modalHelper';
 
-type ModalType={
-  title:string
+type ModalType = {
+  title: string
 }
-export const Modal = ({title}:ModalType) => {
+export const Modal = ({ title }: ModalType) => {
   const dispatch = useDispatch();
 
   const [value, setValue] = useState<string>('');
-
+  const [text, setText] = useState<string>('');
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
 
   };
+  const date = new Date()
+  function addZero(num:number){
+    if(num >= 0 && num <=9){
+      return `0${  num}`
+    }
+      return num
+
+  }
+
+  const actualDate = `${addZero(date.getDate())}. ${addZero(date.getMonth()+1)}. ${addZero(date.getFullYear())}`
   const addTaskHandler = () => {
     if (value.trim() !== '') {
-      dispatch(addTask(value));
+      dispatch(addTask(value,text,actualDate));
       setValue('');
       dispatch(setModalWindow(false));
     }
@@ -32,30 +41,45 @@ export const Modal = ({title}:ModalType) => {
     }
   };
   const rightValue = value.trim();
+
+  const onChangeTextHandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{
+    setText(e.currentTarget.value)
+  }
   const handleOutSideClick = () => {
     dispatch(setModalWindow(false));
   };
   return (
-    <div className={style.searchContainer} >
-      <h3>{title}</h3>
+
+    <div className={style.searchContainer}>
       <ModalHelper onOutsideClick={handleOutSideClick}>
+      <h3>{title}</h3>
+
         <div className={style.addTaskBlock}>
-      <input
-        placeholder='enter task'
-        value={value}
-        onChange={onChangeHandler}
-        onKeyDown={onKeyDownHandler}
-        className={s.input}
-      />
-      <button
-        disabled={!rightValue}
-        onClick={addTaskHandler}
-        className={rightValue ? `${style.btn} ${style.activeBtn}` : `${style.btn} ${style.notActiveBtn}`}
-      >Add Task
-      </button>
+          <div className={style.inputBlock}>
+            <input
+              placeholder='enter task'
+              value={value}
+              onChange={onChangeHandler}
+              onKeyDown={onKeyDownHandler}
+              className={s.input}
+            />
+            <textarea
+              value={text}
+              onChange={onChangeTextHandler}
+            />
+
+          </div>
+
+          <button
+            disabled={!rightValue}
+            onClick={addTaskHandler}
+            className={rightValue ? `${style.btn} ${style.activeBtn}` : `${style.btn} ${style.notActiveBtn}`}
+          >Add Task
+          </button>
         </div>
       </ModalHelper>
     </div>
+
   );
 };
 
