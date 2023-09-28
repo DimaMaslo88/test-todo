@@ -1,14 +1,16 @@
 import React from 'react';
-import { MicroTaskModal } from 'ui/components/modals/addModalWindow/MicroTaskModal';
+
 
 type MicroTasksType ={
+  taskId:string
+  id:string
   text:string
   status:boolean
 }
-export const MicroTasks = ({text,status}:MicroTasksType) => {
+export const MicroTasks = ({taskId,id,text,status}:MicroTasksType) => {
+
   return (
     <div>
-
       {text}
     </div>
   );

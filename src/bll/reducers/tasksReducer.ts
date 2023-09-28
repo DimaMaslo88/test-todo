@@ -1,4 +1,5 @@
 import {
+  AddMicroTaskTextType, AddTaskIdType,
   AddTaskType,
   ChangeTaskStatusType, ChangeTaskTextType,
   ChangeTaskType, FilterCheckedItemsType,
@@ -29,12 +30,12 @@ const tasksState: TasksStateType = {
   ],
   filter: 'all',
   checkedId: [],
-
+  taskId: '',
 };
 export type MicroTaskType = {
-  id:string
-  text:string
-  microTaskStatus:boolean
+  id: string
+  text: string
+  microTaskStatus: boolean
 }
 export type TaskType = {
   id: string
@@ -45,16 +46,16 @@ export type TaskType = {
   timeAtWork: number
   finishDate: string
   priority: number
-  microTasks?:MicroTaskType[]
+  microTasks: MicroTaskType[]
 }
 export type FilterTaskType = 'all' | 'active' | 'completed'
 
 
 export type TasksStateType = {
   tasks: TaskType[]
-
   filter: FilterTaskType
   checkedId: string[]
+  taskId: string
 }
 
 export type TasksActionType = AddTaskType
@@ -65,6 +66,8 @@ export type TasksActionType = AddTaskType
   | FilterCheckedItemsType
   | RemoveTasksStatusType
   | ChangeTaskTextType
+  | AddMicroTaskTextType
+  | AddTaskIdType
 export const TasksReducer = (state: TasksStateType = tasksState, action: TasksActionType): TasksStateType => {
   switch (action.type) {
     case 'ADD-TASK': {
@@ -77,9 +80,19 @@ export const TasksReducer = (state: TasksStateType = tasksState, action: TasksAc
         timeAtWork: 0,
         finishDate: '',
         priority: 2,
+        microTasks: [
+          {
+            id: v1(),
+            text: '',
+            microTaskStatus: false,
+          },
+        ],
 
       };
       return { ...state, tasks: [...state.tasks, newTask] };
+    }
+    case 'ADD-TASK-ID':{
+      return {...state,taskId:action.id}
     }
     case 'CHANGE-TASK-TITLE': {
       return {
@@ -113,7 +126,22 @@ export const TasksReducer = (state: TasksStateType = tasksState, action: TasksAc
       return { ...state, checkedId: action.filterCheckedId };
     }
     case 'REMOVE-TASKS-STATUS': {
-      return { ...state, tasks: state.tasks.map(task => task ? { ...task, isDone: action.remove } : task) };
+      return { ...state, tasks: state.tasks.map(task => task ? { ...task, status: action.remove } : task) };
+    }
+    case 'ADD-MICRO-TASK-TEXT': {
+      const newMicroTask: MicroTaskType = {
+        id: v1(),
+        text: action.value,
+        microTaskStatus: false,
+      };
+      return {
+        ...state, tasks: state.tasks.map(task => task.id === action.taskId ? {
+          ...task, microTasks:[...task.microTasks,newMicroTask],
+        } : task),
+      };
+      //   return {...state,tasks:state.tasks.
+      //     map(task=>task.id ===action.taskId ? {...task.microTasks?.
+      //       map(m=>m.id===action.id?{...m,text:action.value}:m)}:task)}
     }
     default:
       return state;

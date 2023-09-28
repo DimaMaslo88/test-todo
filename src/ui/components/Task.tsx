@@ -4,6 +4,7 @@ import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { EditableSpan } from 'ui/components/universal/EditableSpan';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  addTaskId,
   changeTaskStatus,
   changeTaskText,
   changeTaskTitle,
@@ -46,7 +47,8 @@ export const Task = ({
   const items = useSelector(selectCheckedItems);
 
   const openMicroTaskModalHandler = () => {
-  dispatch(setMicroTaskModalWindow(true))
+    dispatch(setMicroTaskModalWindow(true));
+    dispatch(addTaskId(taskId))
 
   };
   const changeCheckedItems = (e: CheckboxChangeEvent) => {
@@ -95,13 +97,16 @@ export const Task = ({
         </div>
         {microTasks !== undefined && microTasks.map(({ id, text, microTaskStatus }: MicroTaskType) => (
             <ul key={id}>
-  <li className={style.microTaskLi}>
-    <MicroTasks
-     text ={text}
-     status={microTaskStatus}
+              <li className={style.microTaskLi}>
+                <MicroTasks
+                  key={id}
+                  text={text}
+                  status={microTaskStatus}
+                  taskId={taskId}
+                  id={id}
 
-    />
-  </li>
+                />
+              </li>
             </ul>
           ),
         )}

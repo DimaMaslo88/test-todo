@@ -1,9 +1,17 @@
 import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCheckedItems, selectFilter, selectMicroTaskModal, selectModal, selectTasks } from 'bll/selectors';
+import {
+  selectCheckedItems,
+  selectFilter,
+  selectMicroTaskModal,
+  selectModal,
+  selectTaskId,
+  selectTasks,
+} from 'bll/selectors';
 import { TaskType } from 'bll/reducers/tasksReducer';
 import { Task } from 'ui/components/Task';
 import {
+  addMicroTaskText,
   addTask,
   changeTaskStatus,
   filterCheckedItems,
@@ -28,6 +36,7 @@ export const Tasks2 = () => {
   const checkedItems = useSelector(selectCheckedItems);
   const modal = useSelector(selectModal);
 const microTaskModal = useSelector(selectMicroTaskModal)
+  const taskID = useSelector(selectTaskId)
   // const [value, setValue] = useState<string>('');
   useEffect(() => {
     const a = localStorage.getItem('tasks');
@@ -92,7 +101,9 @@ const microTaskModal = useSelector(selectMicroTaskModal)
     dispatch(filterCheckedItems([]));
 
   };
-
+const changeMicroTaskTextModalWindow = (value:string)=>{
+  dispatch(addMicroTaskText(taskID,value))
+}
   return (
 
     <div className={style.tasksContainer}>
@@ -103,7 +114,9 @@ const microTaskModal = useSelector(selectMicroTaskModal)
       </div>
       }
       {microTaskModal &&
-      <MicroTaskModal  title = 'Добавить подзадачу'/>
+        <div className={style.modalContainer}>
+      <MicroTaskModal  changeText = {changeMicroTaskTextModalWindow} title = 'Добавить подзадачу'/>
+        </div>
       }
 
       <div>

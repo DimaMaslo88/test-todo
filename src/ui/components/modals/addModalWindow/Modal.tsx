@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import s from 'styles/input.module.scss';
-import { addTask } from 'bll/actions/tasksActions';
+import { addTask, addTaskId } from 'bll/actions/tasksActions';
 import { useDispatch, useSelector } from 'react-redux';
 import style from 'styles/Tasks.module.scss';
 import { setModalWindow } from 'bll/actions/modalAction';
@@ -18,19 +18,20 @@ export const Modal = ({ title }: ModalType) => {
     setValue(e.currentTarget.value);
 
   };
-  const date = new Date()
-  function addZero(num:number){
-    if(num >= 0 && num <=9){
-      return `0${  num}`
+  const date = new Date();
+
+  function addZero(num: number) {
+    if (num >= 0 && num <= 9) {
+      return `0${num}`;
     }
-      return num
+    return num;
 
   }
 
-  const actualDate = `${addZero(date.getDate())}. ${addZero(date.getMonth()+1)}. ${addZero(date.getFullYear())}`
+  const actualDate = `${addZero(date.getDate())}. ${addZero(date.getMonth() + 1)}. ${addZero(date.getFullYear())}`;
   const addTaskHandler = () => {
     if (value.trim() !== '') {
-      dispatch(addTask(value,text,actualDate));
+      dispatch(addTask(value, text, actualDate));
       setValue('');
       dispatch(setModalWindow(false));
     }
@@ -42,9 +43,9 @@ export const Modal = ({ title }: ModalType) => {
   };
   const rightValue = value.trim();
 
-  const onChangeTextHandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{
-    setText(e.currentTarget.value)
-  }
+  const onChangeTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.currentTarget.value);
+  };
   const handleOutSideClick = () => {
     dispatch(setModalWindow(false));
   };
@@ -52,7 +53,7 @@ export const Modal = ({ title }: ModalType) => {
 
     <div className={style.searchContainer}>
       <ModalHelper onOutsideClick={handleOutSideClick}>
-      <h3>{title}</h3>
+        <h3>{title}</h3>
 
         <div className={style.addTaskBlock}>
           <div className={style.inputBlock}>

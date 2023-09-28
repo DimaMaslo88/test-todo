@@ -6,3 +6,4 @@ export const selectFilter =(state:StateType):FilterTaskType => state.tasks.filte
 export const selectCheckedItems =(state:StateType):string[]=>state.tasks.checkedId
 export const selectModal = (state:StateType):boolean=>state.modal.isOpen
 export const selectMicroTaskModal = (state:StateType):boolean => state.modal.microTaskModalIsOpen
+export const selectTaskId = (state:StateType):string=>state.tasks.taskId

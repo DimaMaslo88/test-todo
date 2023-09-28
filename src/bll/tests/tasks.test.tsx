@@ -8,7 +8,7 @@ import {
     filterTasksByStatus, removeTasksStatus,
     setCheckedItems
 } from "bll/actions/tasksActions";
-import exp from "constants";
+
 
 let startState: TasksStateType
 beforeEach(() => {
@@ -21,7 +21,15 @@ beforeEach(() => {
                 date: '27.09.2023',
                 timeAtWork: 10,
                 finishDate: '28.09.2023',
-                priority: 1,},
+                priority: 1,
+                microTasks: [
+                    {
+                        id: v1(),
+                        text: 'подзадача добавлена',
+                        microTaskStatus: false,
+                    },
+                ],
+            },
             {id: '2',
                 title: "Покрытие тестами",
                 status: false,
@@ -30,11 +38,18 @@ beforeEach(() => {
                 timeAtWork: 10,
                 finishDate: '28.09.2023',
                 priority: 1,
-
+                microTasks: [
+                    {
+                        id: v1(),
+                        text: 'подзадача добавлена',
+                        microTaskStatus: false,
+                    },
+                ],
             }
         ],
         "filter": 'all',
-        "checkedId": []
+        "checkedId": [],
+        "taskId":''
 
     };
 })
