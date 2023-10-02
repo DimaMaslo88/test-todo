@@ -14,20 +14,29 @@
   .columnBlock {
     display: flex;
     justify-content: space-around;
+    .column{
+      border: 2px solid aqua;
+      border-radius: 5px;
+      overflow-y: hidden;
+      width: 350px;
+       height: 500px;
+      .h1 {
+        width: auto;
+        height: auto;
+
+      }
+    }
+
   }
 
-  .h1 {
-    width: auto;
-    height: auto;
 
-  }
 
-  .column {
-    display: flex;
-    width: 300px;
-    height: 500px;
-    background-color: #aebad2;
-  }
+  //.column {
+  //  display: flex;
+  //  width: 300px;
+  //  height: 500px;
+  //  background-color: #aebad2;
+  //}
 
 }
 
@@ -94,6 +103,10 @@
   .task {
     display: flex;
     flex-direction:column;
+    .description{
+      display: flex;
+      margin-left: 10px;
+    }
     .titleTaskBlock{
       display: flex;
       align-items: center;
@@ -109,15 +122,21 @@
 }
 
 
-.description{
-  display: flex;
-}
+
 // стили для подзадач и модалки
 .microTaskLi {
   height: 100%;
   width: 100%;
   list-style-type: none;
   line-height: 1.8;
+  .microTasksContainer{
+    display: flex;
+    justify-content: space-around;
+  }
+  .microTasksText{
+    text-decoration: line-through ;
+    opacity: 0.5;
+  }
 }
 .microTaskModal{
   width: 300px;

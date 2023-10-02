@@ -48,7 +48,7 @@ export const Task = ({
 
   const openMicroTaskModalHandler = () => {
     dispatch(setMicroTaskModalWindow(true));
-    dispatch(addTaskId(taskId))
+    dispatch(addTaskId(taskId));
 
   };
   const changeCheckedItems = (e: CheckboxChangeEvent) => {
@@ -87,10 +87,6 @@ export const Task = ({
       </div>
       <div>
         <div className={style.description}>
-          <Checkbox
-            checked={status}
-
-          />
           <ToolTip text='двойной клик,для изменения задачи'>
             <EditableSpan value={description} onChange={onChangeTextHandler} status={status} />
           </ToolTip>

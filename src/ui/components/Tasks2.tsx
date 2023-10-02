@@ -1,6 +1,7 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  selectBoard,
   selectCheckedItems,
   selectFilter,
   selectMicroTaskModal,
@@ -12,20 +13,16 @@ import { TaskType } from 'bll/reducers/tasksReducer';
 import { Task } from 'ui/components/Task';
 import {
   addMicroTaskText,
-  addTask,
-  changeTaskStatus,
   filterCheckedItems,
   filterTasksByStatus,
-  removeTasksStatus, setCheckedItems,
+  removeTasksStatus,
 } from 'bll/actions/tasksActions';
 import style from 'styles/Tasks.module.scss';
-import s from 'styles/input.module.scss';
 import Draggable from 'react-draggable';
 
-import { setMicroTaskModalWindow, setModalWindow } from 'bll/actions/modalAction';
+import { setModalWindow } from 'bll/actions/modalAction';
 import { AddIcon } from 'icons/addIcon';
 import { ToolTip } from 'ui/components/tooltip/ToolTip';
-import { ModalHelper } from 'ui/helpers/modalHelper';
 import { Modal } from 'ui/components/modals/addModalWindow/Modal';
 import { MicroTaskModal } from 'ui/components/modals/addModalWindow/MicroTaskModal';
 
@@ -35,8 +32,9 @@ export const Tasks2 = () => {
   const filters = useSelector(selectFilter);
   const checkedItems = useSelector(selectCheckedItems);
   const modal = useSelector(selectModal);
-const microTaskModal = useSelector(selectMicroTaskModal)
-  const taskID = useSelector(selectTaskId)
+  const microTaskModal = useSelector(selectMicroTaskModal);
+  const taskID = useSelector(selectTaskId);
+  const boards = useSelector(selectBoard);
   // const [value, setValue] = useState<string>('');
   useEffect(() => {
     const a = localStorage.getItem('tasks');
@@ -101,9 +99,15 @@ const microTaskModal = useSelector(selectMicroTaskModal)
     dispatch(filterCheckedItems([]));
 
   };
-const changeMicroTaskTextModalWindow = (value:string)=>{
-  dispatch(addMicroTaskText(taskID,value))
-}
+  const changeMicroTaskTextModalWindow = (value: string) => {
+    dispatch(addMicroTaskText(taskID, value));
+  };
+
+ const onDropHandler=(e:MouseEvent) =>{
+    e.preventDefault()
+
+  }
+
   return (
 
     <div className={style.tasksContainer}>
@@ -114,9 +118,9 @@ const changeMicroTaskTextModalWindow = (value:string)=>{
       </div>
       }
       {microTaskModal &&
-        <div className={style.modalContainer}>
-      <MicroTaskModal  changeText = {changeMicroTaskTextModalWindow} title = 'Добавить подзадачу'/>
-        </div>
+      <div className={style.modalContainer}>
+        <MicroTaskModal changeText={changeMicroTaskTextModalWindow} title='Добавить подзадачу' />
+      </div>
       }
 
       <div>
@@ -132,7 +136,7 @@ const changeMicroTaskTextModalWindow = (value:string)=>{
       <div className={style.taskBlock}>
         {tasks.map(
           ({ id, title, status, description, date, timeAtWork, finishDate, priority, microTasks }: TaskType) => (
-            <Draggable>
+            <Draggable key={id} onMouseDown={onDropHandler}>
               <ul key={id}>
                 <li className={style.li}>
                   <Task
@@ -155,19 +159,29 @@ const changeMicroTaskTextModalWindow = (value:string)=>{
           ),
         )}
       </div>
-
       <div className={style.columnBlock}>
-        <div>
-          <h1 className={style.h1}>Queue</h1>
-
-        </div>
-        <div>
-          <h1 className={style.h1}>Development</h1>
-        </div>
-
-        <h1 className={style.h1}>Done</h1>
-
+        {boards.map(board => (
+            <div className={style.column}>
+              <h1 className={style.h1}>{board.title}</h1>
+            </div>
+        ))}
       </div>
+
+
+      {/* <div className={style.columnBlock}> */}
+      {/*  <div className={style.column}> */}
+      {/*    <h1 className={style.h1}>Очередь</h1> */}
+
+      {/*  </div> */}
+      {/*  <div className={style.column}> */}
+      {/*    <h1 className={style.h1}>В работе</h1> */}
+      {/*  </div> */}
+      {/*  <div className={style.column}> */}
+      {/*    <h1 className={style.h1}>Сделано</h1> */}
+      {/*  </div> */}
+
+
+      {/* </div> */}
     </div>
   );
 };

@@ -13,6 +13,12 @@ import {
 let startState: TasksStateType
 beforeEach(() => {
     startState = {
+        "boards":[
+            {
+                id:v1(),
+                title:'В работе'
+            }
+        ],
         "tasks": [
             {id: '1',
                 title: "Тестовое задание",

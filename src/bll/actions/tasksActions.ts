@@ -40,6 +40,15 @@ export const addMicroTaskText = (taskId: string, value: string) => {
     value,
   } as const;
 };
+export type ChangeMicroTasksStatusType = ReturnType <typeof changeMicroTasksStatus>
+export const changeMicroTasksStatus = (taskId:string,id:string,isChecked:boolean)=>{
+  return {
+    type:'CHANGE-MICRO-TASK-STATUS',
+    isChecked,
+    taskId,
+    id
+  }as const
+}
 export type ChangeTaskStatusType = ReturnType<typeof changeTaskStatus>
 export const changeTaskStatus = (id: string, status: boolean) => {
   return {
