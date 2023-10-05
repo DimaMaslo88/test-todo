@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, DragEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectBoard,
@@ -35,6 +35,7 @@ export const Tasks2 = () => {
   const microTaskModal = useSelector(selectMicroTaskModal);
   const taskID = useSelector(selectTaskId);
   const boards = useSelector(selectBoard);
+
   // const [value, setValue] = useState<string>('');
   useEffect(() => {
     const a = localStorage.getItem('tasks');
@@ -103,10 +104,6 @@ export const Tasks2 = () => {
     dispatch(addMicroTaskText(taskID, value));
   };
 
- const onDropHandler=(e:MouseEvent) =>{
-    e.preventDefault()
-
-  }
 
   return (
 
@@ -135,35 +132,38 @@ export const Tasks2 = () => {
       </div>
       <div className={style.taskBlock}>
         {tasks.map(
-          ({ id, title, status, description, date, timeAtWork, finishDate, priority, microTasks }: TaskType) => (
-            <Draggable key={id} onMouseDown={onDropHandler}>
-              <ul key={id}>
+          (task: TaskType) => (
+            <Draggable>
+              <ul
+                key={task.id}
+
+              >
                 <li className={style.li}>
                   <Task
-                    key={id}
-                    taskId={id}
-                    title={title}
-                    status={status}
-                    description={description}
-                    date={date}
-                    timeAtWork={timeAtWork}
-                    finishDate={finishDate}
-                    priority={priority}
-                    microTasks={microTasks}
+                    key={task.id}
+                    taskId={task.id}
+                    title={task.title}
+                    status={task.status}
+                    description={task.description}
+                    date={task.date}
+                    timeAtWork={task.timeAtWork}
+                    finishDate={task.finishDate}
+                    priority={task.priority}
+                    microTasks={task.microTasks}
                   />
                 </li>
 
               </ul>
-
             </Draggable>
+
           ),
         )}
       </div>
       <div className={style.columnBlock}>
         {boards.map(board => (
-            <div className={style.column}>
-              <h1 className={style.h1}>{board.title}</h1>
-            </div>
+          <div className={style.column}>
+            <h1 className={style.h1}>{board.title}</h1>
+          </div>
         ))}
       </div>
 
