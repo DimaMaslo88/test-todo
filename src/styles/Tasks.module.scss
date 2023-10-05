@@ -10,7 +10,11 @@
   margin-top: 100px;
   position: relative;
   z-index: 50;
-
+  .headerTasksBlock{
+position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
   .columnBlock {
     display: flex;
     justify-content: space-around;
@@ -21,6 +25,10 @@
       width: 350px;
        height: 500px;
       .h1 {
+        display: flex;
+        justify-content: center;
+        background-color: deepskyblue;
+        opacity: 0.8;
         width: auto;
         height: auto;
 

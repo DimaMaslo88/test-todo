@@ -25,6 +25,8 @@ import { AddIcon } from 'icons/addIcon';
 import { ToolTip } from 'ui/components/tooltip/ToolTip';
 import { Modal } from 'ui/components/modals/addModalWindow/Modal';
 import { MicroTaskModal } from 'ui/components/modals/addModalWindow/MicroTaskModal';
+import { BackArrow } from 'icons/arrow';
+import { useNavigate,Navigate } from 'react-router-dom';
 
 export const Tasks2 = () => {
   const dispatch = useDispatch();
@@ -35,7 +37,7 @@ export const Tasks2 = () => {
   const microTaskModal = useSelector(selectMicroTaskModal);
   const taskID = useSelector(selectTaskId);
   const boards = useSelector(selectBoard);
-
+const navigate = useNavigate()
   // const [value, setValue] = useState<string>('');
   useEffect(() => {
     const a = localStorage.getItem('tasks');
@@ -103,7 +105,9 @@ export const Tasks2 = () => {
   const changeMicroTaskTextModalWindow = (value: string) => {
     dispatch(addMicroTaskText(taskID, value));
   };
-
+const onNavigateHandler = ()=>{
+  navigate('/todolist')
+}
 
   return (
 
@@ -120,7 +124,7 @@ export const Tasks2 = () => {
       </div>
       }
 
-      <div>
+      <div className={style.headerTasksBlock}>
         <ToolTip text='Добавить Задание'>
           < AddIcon
             width={50}
@@ -129,6 +133,14 @@ export const Tasks2 = () => {
             onClick={callModalWindowHandler}
           />
         </ToolTip>
+
+        <BackArrow
+        width={50}
+        height={50}
+        style={{ cursor: 'pointer' }}
+        onClick={onNavigateHandler}
+        />
+
       </div>
       <div className={style.taskBlock}>
         {tasks.map(
