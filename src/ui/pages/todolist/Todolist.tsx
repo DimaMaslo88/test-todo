@@ -17,8 +17,8 @@ export const Todolist = () => {
         <Title title='ToDos' className={s.title} />
         <button
           onClick={navigateToTasksHandler}
-          className={ st.activeBtn }
-        > Go to task page
+          className={ `${st.btn} ${st.activeBtn}` }
+        > Перейти к странице задач
         </button>
       </div>
 

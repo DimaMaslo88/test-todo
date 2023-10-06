@@ -9,21 +9,25 @@
   margin-left: 50px;
   margin-top: 100px;
   position: relative;
-  z-index: 50;
-  .headerTasksBlock{
-position: relative;
+
+  // z-index: 50;
+  .headerTasksBlock {
+    position: relative;
     display: flex;
     justify-content: space-between;
   }
+
   .columnBlock {
     display: flex;
     justify-content: space-around;
-    .column{
+
+    .column {
       border: 2px solid aqua;
       border-radius: 5px;
       overflow-y: hidden;
       width: 350px;
-       height: 500px;
+      height: 500px;
+
       .h1 {
         display: flex;
         justify-content: center;
@@ -36,7 +40,6 @@ position: relative;
     }
 
   }
-
 
 
   //.column {
@@ -64,7 +67,6 @@ position: relative;
   backdrop-filter: blur(5px);
 
 
-
   .searchContainer {
     margin-top: 20px;
     width: 35%;
@@ -75,12 +77,14 @@ position: relative;
     align-items: center;
     background-color: rgb(200, 239, 230);
     border-radius: 6px;
+    z-index: 50;
     //box-shadow: 4px 3px 4px 0 lightgrey
     .addTaskBlock {
       display: flex;
 
     }
   }
+
 }
 
 
@@ -94,12 +98,14 @@ position: relative;
   margin-bottom: 10px;
 
 }
-.inputBlock{
+
+.inputBlock {
   display: flex;
   flex-direction: column;
   height: 100px;
   justify-content: space-around;
 }
+
 .li {
   height: 100%;
   width: 100%;
@@ -108,19 +114,25 @@ position: relative;
   border: 1px solid lightgrey;
   box-shadow: 5px 5px 5px lightslategray;
   cursor: grabbing;
+  padding: 10px;
+
   .task {
     display: flex;
-    flex-direction:column;
-    .description{
+    flex-direction: column;
+
+    .description {
       display: flex;
       margin-left: 10px;
     }
-    .titleTaskBlock{
+
+    .titleTaskBlock {
       display: flex;
       align-items: center;
+
       .checkbox {
         margin-left: 20px;
       }
+
       .editableSpan {
         margin-left: 20px;
       }
@@ -130,30 +142,33 @@ position: relative;
 }
 
 
-
 // стили для подзадач и модалки
 .microTaskLi {
   height: 100%;
   width: 100%;
   list-style-type: none;
   line-height: 1.8;
-  .microTasksContainer{
+
+  .microTasksContainer {
     display: flex;
     justify-content: space-around;
   }
-  .microTasksText{
-    text-decoration: line-through ;
+
+  .microTasksText {
+    text-decoration: line-through;
     opacity: 0.5;
   }
 }
-.microTaskModal{
+
+.microTaskModal {
   width: 300px;
   height: 300px;
   position: fixed;
   background-color: rgb(200, 239, 230);
   display: flex;
   z-index: 100;
-  .microTaskBlock{
+
+  .microTaskBlock {
     display: flex;
     flex-direction: column;
   }

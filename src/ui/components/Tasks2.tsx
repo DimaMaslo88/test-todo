@@ -103,7 +103,8 @@ const navigate = useNavigate()
 
   };
   const changeMicroTaskTextModalWindow = (value: string) => {
-    dispatch(addMicroTaskText(taskID, value));
+   const addMicroTaskText1 = addMicroTaskText(taskID, value);
+    dispatch(addMicroTaskText1);
   };
 const onNavigateHandler = ()=>{
   navigate('/todolist')
@@ -112,7 +113,6 @@ const onNavigateHandler = ()=>{
   return (
 
     <div className={style.tasksContainer}>
-
       {modal &&
       <div className={style.modalContainer}>
         <Modal title='Добавить Задачу' />

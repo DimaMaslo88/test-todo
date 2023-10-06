@@ -22,6 +22,7 @@ export const MicroTasks = ({ taskId, id, text, status }: MicroTasksType) => {
   };
   return (
     <div className={style.microTasksContainer} >
+      {text &&
       <div >
         <Checkbox
           checked={status}
@@ -29,6 +30,8 @@ export const MicroTasks = ({ taskId, id, text, status }: MicroTasksType) => {
           onChange={onChangeValueHandler}
         />
       </div>
+      }
+
 
       <div className={status ? style.microTasksText : ''}>
         {text}

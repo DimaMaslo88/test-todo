@@ -36,7 +36,7 @@ const tasksState: TasksStateType = {
       microTasks: [
         {
           id: v1(),
-          text: 'описание подзадачи',
+          text: '',
           microTaskStatus: false,
         },
       ],
