@@ -42,11 +42,14 @@ export const MicroTaskModal = ({ title, changeText }: MicroTaskModalType) => {
               onChange={changeMicroTaskTextHandler}
 
             />
-            <button
-              className={value ? `${style.btn} ${style.activeBtn}` : `${style.btn} ${style.notActiveBtn}`}
-              onClick={setTextHandler}
-            >Добавить
-            </button>
+            <div className={style.buttonBlock}>
+              <button
+                className={value ? `${style.btn} ${style.activeBtn}` : `${style.btn} ${style.notActiveBtn}`}
+                onClick={setTextHandler}
+              >Добавить
+              </button>
+            </div>
+
           </div>
 
         </div>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import style from 'styles/Tasks.module.scss';
 import { setModalWindow } from 'bll/actions/modalAction';
 import { ModalHelper } from 'ui/helpers/modalHelper';
+import st from 'styles/Textarea.module.scss'
 
 type ModalType = {
   title: string
@@ -64,7 +65,9 @@ export const Modal = ({ title }: ModalType) => {
               onKeyDown={onKeyDownHandler}
               className={s.input}
             />
+
             <textarea
+              className={st.textarea}
               value={text}
               onChange={onChangeTextHandler}
             />
