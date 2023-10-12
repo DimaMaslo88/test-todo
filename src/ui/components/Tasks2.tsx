@@ -145,7 +145,7 @@ const onNavigateHandler = ()=>{
       <div className={style.taskBlock}>
         {tasks.map(
           (task: TaskType) => (
-            <Draggable>
+            <Draggable key={task.id}>
               <ul
                 key={task.id}
 
@@ -173,7 +173,7 @@ const onNavigateHandler = ()=>{
       </div>
       <div className={style.columnBlock}>
         {boards.map(board => (
-          <div className={style.column}>
+          <div className={style.column} key={board.id}>
             <h1 className={style.h1}>{board.title}</h1>
           </div>
         ))}
