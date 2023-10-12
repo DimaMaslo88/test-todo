@@ -1,5 +1,6 @@
 {
   "name": "test-task-todolist",
+  "homepage": "https://dimamaslo88.github.io/test-todo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

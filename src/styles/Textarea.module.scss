@@ -1,0 +1,14 @@
+.textarea {
+  width:100%;
+  resize: vertical;
+  padding:15px;
+  border-radius:10px;
+  border:0;
+
+  height:150px;
+
+}
+textarea:focus{
+  outline: none;
+  box-shadow:4px 4px 12px rgba(0,0,0,0.06);
+}
