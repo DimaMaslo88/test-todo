@@ -54,9 +54,10 @@ export const Modal = ({ title }: ModalType) => {
 
     <div className={style.searchContainer}>
       <ModalHelper onOutsideClick={handleOutSideClick}>
+        <div className={style.addTaskBlock}>
         <h3>{title}</h3>
 
-        <div className={style.addTaskBlock}>
+
           <div className={style.inputBlock}>
             <input
               placeholder='enter task'
@@ -81,6 +82,7 @@ export const Modal = ({ title }: ModalType) => {
           >Add Task
           </button>
         </div>
+
       </ModalHelper>
     </div>
 
