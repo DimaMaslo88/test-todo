@@ -3,10 +3,11 @@
     height: 30px;
     margin-right: 50px;
     border: grey;
+    margin-bottom: 10px;
 
 }
 input:focus{
     outline: none;
     border: 3px solid lightgrey;
-    box-shadow: 2px 2px 3px 0 lightgrey;
+    box-shadow: 1px 1px 3px 0 lightgrey;
 }

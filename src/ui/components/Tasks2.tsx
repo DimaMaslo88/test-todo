@@ -26,7 +26,7 @@ import { ToolTip } from 'ui/components/tooltip/ToolTip';
 import { Modal } from 'ui/components/modals/addModalWindow/Modal';
 import { MicroTaskModal } from 'ui/components/modals/addModalWindow/MicroTaskModal';
 import { BackArrow } from 'icons/arrow';
-import { useNavigate,Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const Tasks2 = () => {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ export const Tasks2 = () => {
   const microTaskModal = useSelector(selectMicroTaskModal);
   const taskID = useSelector(selectTaskId);
   const boards = useSelector(selectBoard);
-const navigate = useNavigate()
+  const navigate = useNavigate();
   // const [value, setValue] = useState<string>('');
   useEffect(() => {
     const a = localStorage.getItem('tasks');
@@ -103,12 +103,12 @@ const navigate = useNavigate()
 
   };
   const changeMicroTaskTextModalWindow = (value: string) => {
-   const addMicroTaskText1 = addMicroTaskText(taskID, value);
+    const addMicroTaskText1 = addMicroTaskText(taskID, value);
     dispatch(addMicroTaskText1);
   };
-const onNavigateHandler = ()=>{
-  navigate('/todolist')
-}
+  const onNavigateHandler = () => {
+    navigate('/todolist');
+  };
 
   return (
 
@@ -135,10 +135,10 @@ const onNavigateHandler = ()=>{
         </ToolTip>
 
         <BackArrow
-        width={50}
-        height={50}
-        style={{ cursor: 'pointer' }}
-        onClick={onNavigateHandler}
+          width={50}
+          height={50}
+          style={{ cursor: 'pointer' }}
+          onClick={onNavigateHandler}
         />
 
       </div>

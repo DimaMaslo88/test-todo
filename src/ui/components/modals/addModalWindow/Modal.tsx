@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import style from 'styles/Tasks.module.scss';
 import { setModalWindow } from 'bll/actions/modalAction';
 import { ModalHelper } from 'ui/helpers/modalHelper';
-import st from 'styles/Textarea.module.scss'
+import st from 'styles/Textarea.module.scss';
 
 type ModalType = {
   title: string
@@ -29,7 +29,7 @@ export const Modal = ({ title }: ModalType) => {
 
   }
 
-  const actualDate = `${addZero(date.getDate())}. ${addZero(date.getMonth() + 1)}. ${addZero(date.getFullYear())}`;
+  const actualDate = `${addZero(date.getDate())}.${addZero(date.getMonth() + 1)}.${addZero(date.getFullYear())}`;
   const addTaskHandler = () => {
     if (value.trim() !== '') {
       dispatch(addTask(value, text, actualDate));
@@ -55,7 +55,7 @@ export const Modal = ({ title }: ModalType) => {
     <div className={style.searchContainer}>
       <ModalHelper onOutsideClick={handleOutSideClick}>
         <div className={style.addTaskBlock}>
-        <h3>{title}</h3>
+          <h3>{title}</h3>
 
 
           <div className={style.inputBlock}>
@@ -74,13 +74,15 @@ export const Modal = ({ title }: ModalType) => {
             />
 
           </div>
+          <div className={style.buttonBlock}>
+            <button
+              disabled={!rightValue}
+              onClick={addTaskHandler}
+              className={rightValue ? `${style.btn} ${style.activeBtn}` : `${style.btn} ${style.notActiveBtn}`}
+            >Add Task
+            </button>
+          </div>
 
-          <button
-            disabled={!rightValue}
-            onClick={addTaskHandler}
-            className={rightValue ? `${style.btn} ${style.activeBtn}` : `${style.btn} ${style.notActiveBtn}`}
-          >Add Task
-          </button>
         </div>
 
       </ModalHelper>

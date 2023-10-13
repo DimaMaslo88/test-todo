@@ -20,6 +20,7 @@
   .columnBlock {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 20px;
 
     .column {
       border: 2px solid aqua;
@@ -37,6 +38,9 @@
         height: auto;
 
       }
+    }
+    .column:hover{
+      box-shadow: 2px 2px 3px 3px aqua
     }
 
   }
@@ -106,11 +110,11 @@
   height: 150px;
   align-items: center;
 
-  .buttonBlock {
-    margin: 15px 5px
-  }
-}
 
+}
+.buttonBlock {
+  margin: 15px 5px
+}
 .li {
   height: 100%;
   width: 100%;

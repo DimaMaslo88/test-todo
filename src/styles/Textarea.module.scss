@@ -1,20 +1,21 @@
 .textarea {
-  width:100%;
+  width: 100%;
   resize: vertical;
-  padding:15px;
-  border-radius:10px;
-  border:0;
-  height:120px;
+  padding: 15px;
+  border-radius: 10px;
+  border: 0;
+  height: 120px;
 
 }
-textarea:focus{
+
+textarea:focus {
   outline: none;
-  box-shadow:4px 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-@media screen and (max-height: 480px){
-.textarea{
-  height: 80px;
-  padding: 5px;
-}
+@media screen and (max-height: 480px) {
+  .textarea {
+    height: 80px;
+    padding: 5px;
+  }
 }
