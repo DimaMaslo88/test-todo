@@ -2,8 +2,9 @@ import React, { ChangeEvent, useState } from 'react';
 import { Checkbox } from 'antd';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useDispatch } from 'react-redux';
-import { changeMicroTasksStatus } from 'bll/actions/tasksActions';
+import { changeMicroTasksStatus, deleteMicroTask } from 'bll/actions/tasksActions';
 import style from 'styles/Tasks.module.scss';
+import { DeleteIcon } from 'icons/delete';
 
 type MicroTasksType = {
   taskId: string
@@ -20,10 +21,13 @@ export const MicroTasks = ({ taskId, id, text, status }: MicroTasksType) => {
       dispatch(changeMicroTasksStatus(taskId, id, e.target.checked));
     }
   };
+  const deleteMicroTaskHandler=()=>{
+dispatch(deleteMicroTask(taskId,id))
+  }
   return (
-    <div className={style.microTasksContainer} >
+    <div className={style.microTasksContainer}>
       {text &&
-      <div >
+      <div>
         <Checkbox
           checked={status}
           value={id}
@@ -36,6 +40,16 @@ export const MicroTasks = ({ taskId, id, text, status }: MicroTasksType) => {
       <div className={status ? style.microTasksText : ''}>
         {text}
       </div>
+
+      {text && <div>
+        <DeleteIcon
+          width={25}
+          height={25}
+          style={{cursor:'pointer'}}
+          onClick={deleteMicroTaskHandler}
+        />
+      </div>}
+
 
     </div>
   );

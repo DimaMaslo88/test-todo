@@ -2,25 +2,25 @@ import {
   AddMicroTaskTextType, AddTaskIdType,
   AddTaskType, ChangeMicroTasksStatusType,
   ChangeTaskStatusType, ChangeTaskTextType,
-  ChangeTaskType, FilterCheckedItemsType,
+  ChangeTaskType, DeleteMicroTaskType, FilterCheckedItemsType,
   FilterTasksByStatusType, RemoveTasksStatusType,
   SetCheckedItemsType,
 } from 'bll/actions/tasksActions';
 import { v1 } from 'uuid';
 
 const tasksState: TasksStateType = {
-  boards:[
+  boards: [
     {
-    id:v1(),
-    title:'Очередь'
-  },
-    {
-      id:v1(),
-      title:'В работе'
+      id: v1(),
+      title: 'Очередь',
     },
     {
-      id:v1(),
-      title:'Сделано'
+      id: v1(),
+      title: 'В работе',
+    },
+    {
+      id: v1(),
+      title: 'Сделано',
     },
   ],
   tasks: [
@@ -51,9 +51,9 @@ export type MicroTaskType = {
   text: string
   microTaskStatus: boolean
 }
-export type  BoardType ={
-  id:string,
-  title:string
+export type  BoardType = {
+  id: string,
+  title: string
 }
 export type TaskType = {
   id: string
@@ -70,7 +70,7 @@ export type FilterTaskType = 'all' | 'active' | 'completed'
 
 
 export type TasksStateType = {
-  boards:BoardType[]
+  boards: BoardType[]
   tasks: TaskType[]
   filter: FilterTaskType
   checkedId: string[]
@@ -88,6 +88,7 @@ export type TasksActionType = AddTaskType
   | AddMicroTaskTextType
   | AddTaskIdType
   | ChangeMicroTasksStatusType
+  | DeleteMicroTaskType
 export const TasksReducer = (state: TasksStateType = tasksState, action: TasksActionType): TasksStateType => {
   switch (action.type) {
     case 'ADD-TASK': {
@@ -164,10 +165,18 @@ export const TasksReducer = (state: TasksStateType = tasksState, action: TasksAc
       //     map(task=>task.id ===action.taskId ? {...task.microTasks?.
       //       map(m=>m.id===action.id?{...m,text:action.value}:m)}:task)}
     }
-    case 'CHANGE-MICRO-TASK-STATUS':{
-      return {...state,tasks:state.tasks.
-        map(task=>task.id === action.taskId ? {...task,microTasks:task.microTasks.
-          map(t=>t.id ===action.id ? {...t,microTaskStatus:action.isChecked}:t)}:task)}
+    case 'CHANGE-MICRO-TASK-STATUS': {
+      return {
+        ...state, tasks: state.tasks.map(task => task.id === action.taskId ? {
+          ...task,
+          microTasks: task.microTasks.map(t => t.id === action.id ? { ...t, microTaskStatus: action.isChecked } : t),
+        } : task),
+      };
+    }
+    case 'DELETE-MICRO-TASK':{
+
+       return {...state,tasks:state.tasks.map(task=>task.id === action.taskId ?
+          {...task,microTasks:task.microTasks.filter(f=>f.id !==action.id)}:task)}
     }
     default:
       return state;

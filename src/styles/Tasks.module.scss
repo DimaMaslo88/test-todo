@@ -21,6 +21,7 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 
     .column {
       border: 2px solid aqua;
@@ -39,8 +40,9 @@
 
       }
     }
-    .column:hover{
-      box-shadow: 2px 2px 3px 3px aqua
+
+    .column:hover {
+      box-shadow: 3px -2px 6px aqua;
     }
 
   }
@@ -112,9 +114,11 @@
 
 
 }
+
 .buttonBlock {
   margin: 15px 5px
 }
+
 .li {
   height: 100%;
   width: 100%;
@@ -219,6 +223,6 @@
   background-color: #e73232;
 }
 
-@media screen and (max-height: 480px){
+@media screen and (max-height: 800px) {
 
 }

@@ -148,9 +148,9 @@ export const Tasks2 = () => {
             <Draggable key={task.id}>
               <ul
                 key={task.id}
-
+                className={style.li}
               >
-                <li className={style.li}>
+                <li >
                   <Task
                     key={task.id}
                     taskId={task.id}
