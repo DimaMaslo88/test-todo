@@ -141,6 +141,7 @@
     .titleTaskBlock {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
 
       .checkbox {
         margin-left: 20px;
